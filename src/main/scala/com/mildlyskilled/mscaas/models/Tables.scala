@@ -70,7 +70,8 @@ object Tables {
   val dropSchema = (users.schema ++ contentMeta.schema).drop
 
   val seedUsersAndMeta = DBIO.seq(
-    Tables.users +=(1, "Kwabena", "Aning", "kwabena.aning@gmail.com", "changeme"),
+    Tables.users += (1, "Kwabena", "Aning", "kwabena.aning@gmail.com", "changeme"),
+    Tables.users += (2, "Kobby", "Aning", "kwabena.aning@outlook.com", "changeme"),
     Tables.contentMeta ++= Seq(
       (1, "Text", "None", "{json: \"content here\"}", 1),
       (2, "HTML", "None", "{json: \"content here\"}", 1)
@@ -80,6 +81,7 @@ object Tables {
   val createDatabase = DBIO.seq(buildSchema, seedUsersAndMeta)
 
   val allUsers = {
-    for {u <- users} yield (u.firstName, u.lastName, u.email)
+    for {u <- users} yield (u.id, u.firstName, u.lastName, u.email)
   }
+
 }

@@ -17,5 +17,6 @@ class ScalatraBootstrap extends LifeCycle {
     val db = Database.forDataSource(cpds)
     context.mount(new MainController(db), "/*")
     context.mount(new AdminController(db), "/admin/*")
+    context.mount(new UserController(db), "/users/*")
   }
 }

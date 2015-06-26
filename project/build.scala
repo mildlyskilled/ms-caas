@@ -9,8 +9,8 @@ object MscaasBuild extends Build {
   val Organization = "com.mildlyskilled"
   val Name = "ms-caas"
   val Version = "0.1.0-SNAPSHOT"
-  val ScalaVersion = "2.11.6"
-  val ScalatraVersion = "2.4.0.RC2-1"
+  val ScalaVersion = "2.11.7"
+  val ScalatraVersion = "2.4.0-RC2-2"
 
   lazy val project = Project (
     "ms-caas",
@@ -25,6 +25,7 @@ object MscaasBuild extends Build {
       libraryDependencies ++= Seq(
         "org.scalatra" %% "scalatra" % ScalatraVersion,
         "org.scalatra" %% "scalatra-scalate" % ScalatraVersion,
+        "org.scalatra" %% "scalatra-swagger"  % ScalatraVersion,
         "org.scalatra" %% "scalatra-specs2" % ScalatraVersion % "test",
         "ch.qos.logback" % "logback-classic" % "1.1.2" % "runtime",
         "org.eclipse.jetty" % "jetty-webapp" % "9.1.5.v20140505" % "container",
@@ -32,7 +33,8 @@ object MscaasBuild extends Build {
         "javax.servlet" % "javax.servlet-api" % "3.1.0",
         "com.typesafe.slick" %% "slick" % "3.0.0",
         "com.h2database" % "h2" % "1.4.181",
-        "com.mchange" % "c3p0" % "0.9.5.1"
+        "com.mchange" % "c3p0" % "0.9.5.1",
+        "org.json4s" % "json4s-native_2.11" % "3.3.0.RC2"
       ),
       scalateTemplateConfig in Compile <<= (sourceDirectory in Compile){ base =>
         Seq(
