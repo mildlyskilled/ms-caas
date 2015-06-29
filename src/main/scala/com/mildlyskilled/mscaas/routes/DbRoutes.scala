@@ -1,10 +1,10 @@
 package com.mildlyskilled.mscaas.routes
 
-import com.mildlyskilled.mscaas.models.Tables
+import com.mildlyskilled.mscaas.models.{DatabaseConnection, Users}
 import org.scalatra.{ScalatraBase, FutureSupport}
 import slick.driver.JdbcDriver.api._
 
-trait DbRoutes extends ScalatraBase with FutureSupport{
+trait DbRoutes extends ScalatraBase with FutureSupport with DatabaseConnection{
 
   def db: Database
 
@@ -13,12 +13,12 @@ trait DbRoutes extends ScalatraBase with FutureSupport{
   }
 
   get("/create-tables") {
-    db.run(Tables.createDatabase)
+    db.run(Users.createDatabase)
     "Tables Created<br /><a href=\"/admin/seed-data\">Seed Data</a>"
   }
 
   get("/seed-data") {
-    db.run(Tables.seedUsersAndMeta)
+    db.run(Users.seedUsers)
     "Data Seeded <a href=\"/users\">View Users</a>"
   }
 

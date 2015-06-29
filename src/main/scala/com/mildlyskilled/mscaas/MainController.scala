@@ -1,12 +1,10 @@
 package com.mildlyskilled.mscaas
 
-import com.mildlyskilled.mscaas.models.Tables
 import org.scalatra.{FutureSupport, ScalatraBase}
-import slick.driver.JdbcDriver.api._
 import org.json4s.{DefaultFormats, Formats}
 import org.scalatra.json._
 
-class MainController(val db: Database) extends MsCaasStack with ScalatraBase with FutureSupport with NativeJsonSupport {
+class MainController extends MsCaasStack with ScalatraBase with FutureSupport with NativeJsonSupport {
 
   protected implicit def executor = scala.concurrent.ExecutionContext.Implicits.global
 
