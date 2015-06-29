@@ -61,5 +61,5 @@ object Users extends DatabaseConnection {
     users += User(2, "Kobby", "Aning", "kwabena.aning@outlook.com", "changeme", currentTime, currentTime)
   )
 
-  val createDatabase = DBIO.seq(buildSchema, seedUsers)
+  def createAndSeedDatabase = db.run(DBIO.seq(buildSchema, seedUsers))
 }
