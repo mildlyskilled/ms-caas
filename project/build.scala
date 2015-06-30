@@ -34,7 +34,8 @@ object MscaasBuild extends Build {
         "com.typesafe.slick" %% "slick" % "3.0.0",
         "com.h2database" % "h2" % "1.4.181",
         "com.mchange" % "c3p0" % "0.9.5.1",
-        "org.json4s" % "json4s-native_2.11" % "3.3.0.RC2"
+        "org.scalatra" % "scalatra-json_2.11" % "2.4.0-RC2-2",
+        "org.json4s" % "json4s-jackson_2.11" % "3.3.0.RC2"
       ),
       scalateTemplateConfig in Compile <<= (sourceDirectory in Compile){ base =>
         Seq(

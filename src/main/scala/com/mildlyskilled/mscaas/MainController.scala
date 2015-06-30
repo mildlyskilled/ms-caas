@@ -4,7 +4,7 @@ import org.scalatra.{FutureSupport, ScalatraBase}
 import org.json4s.{DefaultFormats, Formats}
 import org.scalatra.json._
 
-class MainController extends MsCaasStack with ScalatraBase with FutureSupport with NativeJsonSupport {
+class MainController extends MsCaasStack with ScalatraBase with FutureSupport with JacksonJsonSupport {
 
   protected implicit def executor = scala.concurrent.ExecutionContext.Implicits.global
 

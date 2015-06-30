@@ -33,20 +33,19 @@ object Users extends DatabaseConnection {
     def updatedAt = column[Timestamp]("updated_at", O.Default(new Timestamp(System.currentTimeMillis)))
 
     // projection
-    def * = (id, firstName, lastName, email, password, createdAt, updatedAt) <>(User.tupled, User.unapply)
+    def * = (id, firstName, lastName, email, password, createdAt, updatedAt) <> (User.tupled, User.unapply)
 
-    def forSelect = (id, firstName, lastName, email, createdAt, updatedAt)
   }
 
   val users = TableQuery[Users]
 
   def allUsers = {
-    db.run(users.map(_.forSelect).result)
+    db.run(users.result)
   }
 
 
   def findUserByID(userID: Int) = {
-    val user = users.filter(_.id === userID).map(_.forSelect).result
+    val user = users.filter(_.id === userID).result
     db.run(user)
   }
 
