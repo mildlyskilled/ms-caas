@@ -12,12 +12,11 @@ case class User(id: Int,
                 createdAt: Timestamp,
                 updatedAt: Timestamp)
 
-object Users extends DatabaseConnection {
 
+object Users extends DatabaseConnection {
 
   class Users(tag: Tag)
     extends Table[User](tag, "USERS") {
-
 
     def id = column[Int]("user_id", O.PrimaryKey)
 
@@ -36,17 +35,18 @@ object Users extends DatabaseConnection {
     // projection
     def * = (id, firstName, lastName, email, password, createdAt, updatedAt) <>(User.tupled, User.unapply)
 
+    def forSelect = (id, firstName, lastName, email, createdAt, updatedAt)
   }
 
   val users = TableQuery[Users]
 
   def allUsers = {
-    val us = users.result
-    db.run(us)
+    db.run(users.map(_.forSelect).result)
   }
 
+
   def findUserByID(userID: Int) = {
-    val user = users.filter(u => u.id === userID).result
+    val user = users.filter(_.id === userID).map(_.forSelect).result
     db.run(user)
   }
 
@@ -58,8 +58,7 @@ object Users extends DatabaseConnection {
 
   val seedUsers = DBIO.seq(
     users += User(1, "Kwabena", "Aning", "kwabena.aning@gmail.com", "changeme", currentTime, currentTime),
-    users += User(2, "Kobby", "Aning", "kwabena.aning@outlook.com", "changeme", currentTime, currentTime)
-  )
+    users += User(2, "Kobby", "Aning", "kwabena.aning@outlook.com", "changeme", currentTime, currentTime))
 
   def createAndSeedDatabase = db.run(DBIO.seq(buildSchema, seedUsers))
 }
