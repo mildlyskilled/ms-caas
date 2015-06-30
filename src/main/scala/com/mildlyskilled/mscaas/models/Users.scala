@@ -4,16 +4,15 @@ import slick.dbio.DBIO
 import slick.driver.JdbcDriver.api._
 import java.sql.Timestamp
 
-case class User(id: Int,
-                firstName: String,
-                lastName: String,
-                email: String,
-                password: String,
-                createdAt: Timestamp,
-                updatedAt: Timestamp)
-
-
 object Users extends DatabaseConnection {
+
+  case class User(id: Int,
+                  firstName: String,
+                  lastName: String,
+                  email: String,
+                  password: String,
+                  createdAt: Timestamp,
+                  updatedAt: Timestamp)
 
   class Users(tag: Tag)
     extends Table[User](tag, "USERS") {
@@ -37,7 +36,7 @@ object Users extends DatabaseConnection {
 
   }
 
-  val users = TableQuery[Users]
+  lazy val users = TableQuery[Users]
 
   def allUsers = {
     db.run(users.result)
