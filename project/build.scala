@@ -27,7 +27,7 @@ object MscaasBuild extends Build {
         "org.scalatra" %% "scalatra-scalate" % ScalatraVersion,
         "org.scalatra" %% "scalatra-swagger"  % ScalatraVersion,
         "org.scalatra" %% "scalatra-specs2" % ScalatraVersion % "test",
-        "ch.qos.logback" % "logback-classic" % "1.1.2" % "runtime",
+        "ch.qos.logback" % "logback-classic" % "1.1.3" % "runtime",
         "org.eclipse.jetty" % "jetty-webapp" % "9.1.5.v20140505" % "container",
         "org.eclipse.jetty" % "jetty-plus" % "9.1.5.v20140505" % "container",
         "javax.servlet" % "javax.servlet-api" % "3.1.0",
@@ -35,7 +35,9 @@ object MscaasBuild extends Build {
         "com.h2database" % "h2" % "1.4.181",
         "com.mchange" % "c3p0" % "0.9.5.1",
         "org.scalatra" % "scalatra-json_2.11" % "2.4.0-RC2-2",
-        "org.json4s" % "json4s-jackson_2.11" % "3.3.0.RC2"
+        "org.json4s" % "json4s-jackson_2.11" % "3.3.0.RC2",
+        "org.json4s"   %% "json4s-native" % "3.3.0.RC2",
+        "org.scalatra" % "scalatra-swagger_2.11" % "2.4.0-RC2-2"
       ),
       scalateTemplateConfig in Compile <<= (sourceDirectory in Compile){ base =>
         Seq(
