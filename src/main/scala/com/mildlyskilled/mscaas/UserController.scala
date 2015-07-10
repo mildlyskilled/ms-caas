@@ -10,12 +10,10 @@ import org.scalatra.swagger.{SwaggerSupport, Swagger}
 
 
 class UserController extends MsCaasStack
-with JacksonJsonSupport
-with FutureSupport {
+with CommonJsonController {
 
   protected val applicationDescription = "The user API exposes methods to interact with user accounts for this service"
 
-  protected implicit def executor = scala.concurrent.ExecutionContext.Implicits.global
 
   // Sets up automatic case class to JSON output serialization, required by
   // the JValueResult trait.
@@ -28,9 +26,6 @@ with FutureSupport {
     }
   }
 
-  before() {
-    contentType = formats("json")
-  }
 
   get("/") {
     Users.allUsers
