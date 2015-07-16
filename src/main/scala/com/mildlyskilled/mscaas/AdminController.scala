@@ -10,11 +10,14 @@ class AdminController extends MsCaasStack {
     contentType = "text/html"
   }
 
-  get("/create-seed") {
-    Users.createAndSeedDatabase
+  get("/setup") {
+    Users.createAndSeedUsers
     ApiApplications.createAndSeedApps
-    "Tables Created and Seeded<br /><a href=\"/users\">View Users</a> " +
-      "<a href=\"/apps\">View Apps</a>"
+    "Tables Created and Seeded<br />" +
+      "<ul>" +
+      "<li><a href=\"/users\">View Users</a></li>" +
+      "<li><a href=\"/apps\">View Apps</a></li>" +
+      "<ul>"
   }
 
 

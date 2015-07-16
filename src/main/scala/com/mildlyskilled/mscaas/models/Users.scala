@@ -36,6 +36,12 @@ object Users extends DatabaseConnection {
 
   }
 
+  object UserQuery extends TableQuery(new Users(_)){
+    val findById = this.findBy(_.id)
+
+    val findByEmail = this.findBy(_.email)
+  }
+
   lazy val users = TableQuery[Users]
 
   def allUsers = {
@@ -58,5 +64,5 @@ object Users extends DatabaseConnection {
     users += User(1, "Kwabena", "Aning", "kwabena.aning@gmail.com", "changeme", currentTime, currentTime),
     users += User(2, "Kobby", "Aning", "kwabena.aning@outlook.com", "changeme", currentTime, currentTime))
 
-  def createAndSeedDatabase = db.run(DBIO.seq(buildSchema, seedUsers))
+  def createAndSeedUsers = db.run(DBIO.seq(buildSchema, seedUsers))
 }

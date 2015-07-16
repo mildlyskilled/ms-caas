@@ -38,21 +38,39 @@ object ApiApplications extends DatabaseConnection {
 
   lazy val apps = TableQuery[ApiApplications]
 
-  def allApps(activeStatus: Boolean = true) = {
-    for {
-      a <- apps if a.active === activeStatus
-      u <- Users.users if u.id === a.ownerId
-    } yield(a, u)
+  def allApps(activeStatus:Boolean = true) = {
+
+    val registeredApps = {
+      for {
+        a <- apps
+        u <- Users.users if a.ownerId === u.id
+      } yield (a, u)
+    }
+
+    val action = registeredApps.result
+    db.run(action)
+  }
+
+  def appsByUser(id:Int) = {
+    val action = apps.filter(_.ownerId === id).result
+    db.run(action)
+  }
+
+  def appById(id:Int) = {
+    apps.findBy(_.id === id)
   }
 
   val buildSchema = apps.schema.create
+
 
   val dropSchema = apps.schema.drop
 
   val currentTime = new Timestamp(System.currentTimeMillis)
 
   val seedApps = DBIO.seq(
-    apps += ApiApplication(1, "apikeyhere", "appsecretehere", 1, true, currentTime, currentTime)
+    apps += ApiApplication(1, "apikeyhere", "appsecretehere", 1, true, currentTime, currentTime),
+    apps += ApiApplication(2, "apikeytwo", "appsecretetwo", 2, true, currentTime, currentTime),
+    apps += ApiApplication(3, "apikeythreeo", "appsecretethree", 1, true, currentTime, currentTime)
   )
 
   def createAndSeedApps = db.run(DBIO.seq(buildSchema, seedApps))

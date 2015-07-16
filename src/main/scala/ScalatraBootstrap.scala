@@ -16,6 +16,7 @@ class ScalatraBootstrap extends LifeCycle {
     context.mount(new MainController, "/*")
     context.mount(new AdminController, "/admin/*")
     context.mount(new UserController, "/users", "users")
+    context.mount(new AppController, "/apps", "apps")
     context.mount(new ResourcesController, "/api-docs")
   }
 }

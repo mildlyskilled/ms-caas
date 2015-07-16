@@ -6,4 +6,5 @@ import slick.driver.JdbcDriver.api._
 trait DatabaseConnection {
   val cpds = new ComboPooledDataSource
   val db = Database.forDataSource(cpds)
+
 }
