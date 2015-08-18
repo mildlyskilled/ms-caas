@@ -1,7 +1,7 @@
 package com.mildlyskilled.mscaas.models
 
 import slick.dbio.DBIO
-import slick.driver.JdbcDriver.api._
+import slick.driver.H2Driver.api._
 import java.sql.Timestamp
 
 object Users extends DatabaseConnection {
@@ -27,7 +27,7 @@ object Users extends DatabaseConnection {
 
     def password = column[String]("password")
 
-    def createdAt = column[Timestamp]("created_at", O.Default(new Timestamp(System.currentTimeMillis)), O.NotNull)
+    def createdAt = column[Timestamp]("created_at", O.Default(new Timestamp(System.currentTimeMillis)))
 
     def updatedAt = column[Timestamp]("updated_at", O.Default(new Timestamp(System.currentTimeMillis)))
 

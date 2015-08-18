@@ -1,7 +1,7 @@
 package com.mildlyskilled.mscaas.models
 
 import slick.dbio.DBIO
-import slick.driver.JdbcDriver.api._
+import slick.driver.H2Driver.api._
 import java.sql.Timestamp
 
 object ApiApplications extends DatabaseConnection {
@@ -26,7 +26,7 @@ object ApiApplications extends DatabaseConnection {
 
     def active = column[Boolean]("active")
 
-    def createdAt = column[Timestamp]("created_at", O.Default(new Timestamp(System.currentTimeMillis)), O.NotNull)
+    def createdAt = column[Timestamp]("created_at", O.Default(new Timestamp(System.currentTimeMillis)))
 
     def updatedAt = column[Timestamp]("updated_at", O.Default(new Timestamp(System.currentTimeMillis)))
 
